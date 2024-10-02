@@ -13,7 +13,7 @@ This project is a VueJS [Nuxt] project for learning purposes. It was a restauran
 
 ## Features
 
-- You are able to navigate between different routes vie Vue-router
+- You are able to navigate between different routes via Vue-router
 - A home page includes products. You can filter and add to cart different foods.
 - A products page includes all different kinds of products and categories.
 - An orders page which contains your previous orders. ( Make sure you are not reloading the page to do not lose your orders 😂 )
