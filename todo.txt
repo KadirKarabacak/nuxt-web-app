@@ -1,0 +1,5 @@
+# TODOS:
+
+Link of demo proj -- https://www.youtube.com/watch?v=bUP6Qf1Rojk&ab_channel=AAEIdeaPro
+
+1- Add icons for the increase - decrease and close buttons. --- https://www.xicons.org/#/ --- https://github.com/07akioni/xicons#installation
