@@ -1,6 +1,6 @@
 <template>
-    <div class="p-4 h-[100dvh] overflow-auto">
-      <ul class="grid grid-cols-3 gap-4">
+    <div class="p-4 h-[100dvh] overflow-y-scroll">
+      <ul class="grid grid-cols-3 gap-4 mb-10">
         <li v-for="product in filteredProducts" :key="product.id">
           <div class="border border-stone-700 rounded-lg shadow-lg p-4 flex flex-col text-white">
             <img :src="product.image" alt="Ürün Resmi" class="w-full h-48 object-cover mb-2 rounded-sm" :class="{'filter grayscale': product.outOfOrder}" />
