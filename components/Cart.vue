@@ -12,10 +12,10 @@
       @click="toggleCart"
       class="fixed bottom-2 right-6 py-6 px-8 rounded-lg cursor-pointer shadow-lg transition-opacity text-lg"
     >
-      <span class="flex gap-2 items-center justify-center text-stone-100 z-80 relative">
-        Go cart ({{ cartStore.cartItemCount }})
-         <client-only>
-          <font-awesome-icon icon="cart-shopping" />
+      <span class="flex gap-2 items-center justify-center text-stone-200 z-80 relative font-bold">
+        Go to cart ({{ cartStore.cartItemCount }})
+        <client-only>
+           <font-awesome-icon icon="cart-shopping" class="text-stone-200" />
         </client-only>
       </span>
     </n-button>
@@ -40,12 +40,12 @@
             There are no products in your cart. Start by adding a new product 😉
           </li>
           <li v-for="item in cartStore.cart" :key="item.id">
-            <div :class="{'flex-col': is450px}"class="flex bg-stone-700 rounded-lg p-4 relative"> <!-- flex-col w-auto mr-0 h-[10rem] -->
-              <img :src="item.image" alt="Ürün Resmi" :class="{'w-auto mr-0 h-[10rem]': is450px}" class="w-[8rem] h-[8rem] object-cover mr-4 rounded-md" />
+            <div :class="{'flex-col': is450px}"class="flex bg-stone-700 rounded-lg p-4 relative">
+              <img :src="item.image" alt="Product Image" :class="{'w-auto !mr-0 h-[10rem]': is450px}" class="w-[8rem] h-[8rem] object-cover mr-4 rounded-md" />
               <div class="flex flex-col flex-grow justify-around">
                 <div class="text-white font-semibold text-lg">{{ item.name }}</div>
                 <div class="text-gray-400">Price: ${{ item.price }}</div>
-                <div :class="{'self-center': is450px}" class="flex items-center mt-2"> <!-- self-center -->
+                <div class="flex items-center mt-2">
                   <n-button class="rounded-full" type="error" @click="decreaseQuantity(item)"><font-awesome-icon icon="minus" /></n-button>
                   <span class="mx-2 px-3 py-1 border rounded-full text-white">{{ item.quantity }}</span>
                   <n-button class="rounded-full" type="primary" @click="increaseQuantity(item)"><font-awesome-icon icon="plus" /></n-button>
@@ -53,7 +53,7 @@
               </div>
               <n-tooltip placement="left" trigger="hover">
                 <template #trigger>
-              <n-button class="absolute top-0 right-0 rounded-tl-none rounded-br-none" @click="removeFromCart(item.id)" type="error"><font-awesome-icon icon="trash" /></n-button>
+              <n-button :class="{'bottom-4 rounded-full right-2': is450px, 'top-0 rounded-tl-none rounded-br-none': !is450px}" class="absolute right-0" @click="removeFromCart(item.id)" type="error"><font-awesome-icon icon="trash" /></n-button>
             </template>
             <span> Remove product from cart </span>
           </n-tooltip>
@@ -75,7 +75,7 @@
         </div>
         <div class="flex flex-col gap-4 justify-center items-center">
           <n-button @click="checkout" type="primary" class="mt-4 py-6 w-[90%] text-lg" :disabled="cartStore.cart.length === 0" :loading="isLoading">
-            Checkout
+            {{ isLoading ? "Checking out..." : "Checkout" }}
           </n-button>
           <n-button
             @click="clearCart"
