@@ -11,9 +11,11 @@
     v-if="!isMenuOpen && isMobile"
     @click="toggleMenu"
     type="primary"
-    class="fixed top-6 left-8 p-4 rounded-full cursor-pointer shadow-lg transition-opacity z-30 h-auto"
+    class="fixed top-2 left-2 p-4 rounded-full cursor-pointer shadow-lg transition-opacity z-30 h-auto"
   >
-    <font-awesome-icon :icon="['fas', 'bars']" class="text-white text-xl" />
+  <client-only>
+    <font-awesome-icon :icon="['fas', 'bars']" class="text-stone-300 text-xl" />
+  </client-only>
   </n-button>
 
   <!-- Hamburger menu -->
@@ -29,6 +31,7 @@
     </div>
     <ul class="flex flex-col gap-2 items-center">
       <li
+        @click="goToHome"
         :class="{
           'bg-stone-600': isActive('/'),
           '!border-green-400 border-b-4': isActive('/'),
@@ -36,17 +39,20 @@
         }"
       >
         <span class="flex items-center w-3/4">
-          <font-awesome-icon class="text-green-400" :icon="['fas', 'home']" />
+          <client-only>
+            <font-awesome-icon class="text-green-400" :icon="['fas', 'home']" />
+          </client-only>
           <n-button
             type="text"
             class="text-green-400 font-bold"
-            @click="goToHome"
+            
           >
             Home
           </n-button>
         </span>
       </li>
       <li
+        @click="goToProducts"
         :class="{
           'bg-stone-600': isActive('/products'),
           '!border-green-400 border-b-4': isActive('/products'),
@@ -54,17 +60,20 @@
         }"
       >
         <span class="flex items-center w-3/4">
-          <font-awesome-icon class="text-green-400" icon="archive" />
+          <client-only>
+            <font-awesome-icon class="text-green-400" icon="archive" />
+          </client-only>
           <n-button
             type="text"
             class="text-green-400 font-bold"
-            @click="goToProducts"
+            
           >
             Products
           </n-button>
         </span>
       </li>
       <li
+        @click="goToOrders"
         :class="{
           'bg-stone-600': isActive('/orders'),
           '!border-green-400 border-b-4': isActive('/orders'),
@@ -72,11 +81,13 @@
         }"
       >
         <span class="flex items-center w-3/4">
-          <font-awesome-icon class="text-green-400" icon="cart-shopping" />
+          <client-only>
+           <font-awesome-icon class="text-green-400" icon="cart-shopping" />
+          </client-only>
           <n-button
             type="text"
             class="text-green-400 font-bold"
-            @click="goToOrders"
+            
           >
             Orders
           </n-button>
@@ -92,6 +103,7 @@
     </div>
     <ul class="flex flex-col gap-2">
       <li
+        @click="goToHome"
         :class="{
           'bg-stone-600': isActive('/'),
           '!border-green-400 border-b-4': isActive('/'),
@@ -99,17 +111,19 @@
         }"
       >
         <span class="flex items-center w-3/4">
-          <font-awesome-icon class="text-green-400" :icon="['fas', 'home']" />
+          <client-only>
+            <font-awesome-icon class="text-green-400" :icon="['fas', 'home']" />
+          </client-only>
           <n-button
             type="text"
             class="text-green-400 font-bold"
-            @click="goToHome"
           >
             Home
           </n-button>
         </span>
       </li>
       <li
+        @click="goToProducts"
         :class="{
           'bg-stone-600': isActive('/products'),
           '!border-green-400 border-b-4': isActive('/products'),
@@ -117,17 +131,19 @@
         }"
       >
         <span class="flex items-center w-3/4">
-          <font-awesome-icon class="text-green-400" icon="archive" />
+          <client-only>
+            <font-awesome-icon class="text-green-400" icon="archive" />
+          </client-only>
           <n-button
             type="text"
             class="text-green-400 font-bold"
-            @click="goToProducts"
           >
             Products
           </n-button>
         </span>
       </li>
       <li
+        @click="goToOrders"
         :class="{
           'bg-stone-600': isActive('/orders'),
           '!border-green-400 border-b-4': isActive('/orders'),
@@ -135,11 +151,12 @@
         }"
       >
         <span class="flex items-center w-3/4">
-          <font-awesome-icon class="text-green-400" icon="cart-shopping" />
+          <client-only>
+            <font-awesome-icon class="text-green-400" icon="cart-shopping" />
+          </client-only>
           <n-button
             type="text"
             class="text-green-400 font-bold"
-            @click="goToOrders"
           >
             Orders
           </n-button>
