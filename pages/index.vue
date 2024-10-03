@@ -10,6 +10,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useHead } from '#imports'
 import SearchInput from '@/components/SearchInput.vue'
 import ProductList from '@/components/ProductList.vue'
 import { products } from '~/data/products'
@@ -20,6 +21,15 @@ const searchQuery = ref('')
 const updateSearch = (query) => {
   searchQuery.value = query // Arama terimini güncelle
 }
+
+// Sayfaya metadata eklemek
+useHead({
+  title: 'Home | Nuxt', // Sayfa başlığı
+  meta: [
+    { name: 'description', content: 'Search for products and view results instantly' },
+    { name: 'keywords', content: 'products, search, ecommerce' }
+  ]
+})
 </script>
 
 <style scoped>
