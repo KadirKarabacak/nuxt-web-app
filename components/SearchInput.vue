@@ -4,13 +4,13 @@
     <n-input
       v-model:value="searchQuery"
       type="success"
-      class="p-2 rounded-md text-lg border-none"
+      class="p-2 rounded-md text-lg border-none bg-stone-700"
       placeholder="Search for a product"
       @input="updateSearch"
     >
       <template #suffix>
         <client-only>
-          <font-awesome-icon class="text-green-600" icon="search" />
+          <font-awesome-icon class="text-stone-400" icon="search" />
         </client-only>
       </template>
     </n-input>
@@ -33,3 +33,10 @@ const updateSearch = () => {
   emit('update:search', searchQuery.value)
 }
 </script>
+
+<style scoped>
+
+::v-deep(.n-input__border) {
+  border-color:#44403c;
+}
+</style>
