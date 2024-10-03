@@ -30,6 +30,14 @@
   import { ref } from 'vue';
   import { NGradientText } from 'naive-ui';
   import { products } from '@/data/products';
+  import { useHead } from "#imports"
+  useHead({
+    title: 'Products | Nuxt', // Sayfa başlığı
+    meta: [
+      { name: 'description', content: 'Display all products & categories' },
+      { name: 'keywords', content: 'products, ecommerce, orders, food, food categories' }
+    ]
+  })
   
   const categories = ref(['Fast Food', 'Meats', 'Pasta', 'Salads', 'Sweet Food']);
   
