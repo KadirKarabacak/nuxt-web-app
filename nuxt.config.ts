@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   plugins: [
-    '~/plugins/fontawesome.ts', // FontAwesome plugin'i buraya ekliyoruz
+    '~/plugins/fontawesome.ts'
   ],
   compatibilityDate: '2024-10-02',
 })
