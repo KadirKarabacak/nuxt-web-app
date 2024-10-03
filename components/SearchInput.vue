@@ -1,8 +1,10 @@
 <template>
-  <div class="w-3/4 h-auto mt-2 mb-4 flex justify-center pl-4">
+  <div :class="{'mx-0 ml-auto mr-4': is500px}" class="w-3/4 h-auto mt-2 mb-4 mx-auto flex justify-center pl-4">
+    <!-- Bu inputun altındaki .imput__border classına border-color ||  -->
     <n-input
       v-model:value="searchQuery"
-      class="search-input !bg-transparent  p-2 rounded-md text-lg border-none"
+      type="success"
+      class="p-2 rounded-md text-lg border-none"
       placeholder="Search for a product"
       @input="updateSearch"
     >
@@ -19,6 +21,10 @@
 <script setup>
 import { ref, defineEmits } from 'vue'
 import { NInput } from 'naive-ui';
+import { useWindowSize } from '@vueuse/core'
+const { width } = useWindowSize()
+const is500px = computed(() => width.value <= 500)
+
 
 const emit = defineEmits()
 const searchQuery = ref('')
@@ -27,11 +33,3 @@ const updateSearch = () => {
   emit('update:search', searchQuery.value)
 }
 </script>
-
-<style scoped>
-.search-input {
-  color: #f5f5f5 !important; /* Yazı rengini burada belirliyoruz */
-  border-color: #3b82f6 !important; /* Border rengini burada belirliyoruz */
-}
-
-</style>
