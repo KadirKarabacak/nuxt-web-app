@@ -4,7 +4,7 @@
       <n-gradient-text type="success" :class="{
           'text-center w-full': isMobile,
         }">
-        Your Order Details
+        Order Details
       </n-gradient-text>
     </h1>
     <div v-if="orders?.length > 0">
@@ -13,7 +13,9 @@
       </div>
     </div>
     <div v-else class="w-full h-[80%] flex justify-center items-center">
-      <p class="text-white text-2xl">No order found. <router-link to="/" class="underline text-green-400">Go home</router-link> to make orders.</p>
+      <p class="text-white text-2xl">No order found. <router-link to="/" class="underline text-green-500 font-bold">Go home <client-only>
+           <font-awesome-icon icon="home" class="text-sm pb-[0.2rem]" />
+        </client-only> </router-link> to make orders.</p>
     </div>
   </div>
 </template>
