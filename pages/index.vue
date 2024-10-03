@@ -2,9 +2,9 @@
   <div class="relative">
     <SearchInput @update:search="updateSearch" />
     <ProductList :searchQuery="searchQuery" />
-    <span class="absolute right-8 top-2 text-green-500 text-xl">
+    <!-- <span class="absolute right-8 top-2 text-green-500 text-xl">
       {{ productsLength }} products found
-    </span>
+    </span> -->
   </div>
 </template>
 
@@ -13,8 +13,12 @@ import { ref } from 'vue'
 import { useHead } from '#imports'
 import SearchInput from '@/components/SearchInput.vue'
 import ProductList from '@/components/ProductList.vue'
-import { products } from '~/data/products'
-const productsLength = products.length
+// import { products } from '~/data/products'
+import { useWindowSize } from '@vueuse/core'
+// const productsLength = products.length
+
+const { width } = useWindowSize()
+const is500px = computed(() => width.value <= 500)
 
 const searchQuery = ref('')
 
