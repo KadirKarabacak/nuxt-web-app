@@ -1,14 +1,19 @@
 <template>
+  <div
+    v-if="isCartVisible"
+    class="fixed inset-0 bg-black opacity-60 z-40"
+    @click="toggleCart" 
+  ></div>
   <div>
     <!-- Sepete git butonu -->
     <n-button
       type="primary"
       v-if="cartStore.cart.length > 0"
       @click="toggleCart"
-      class="fixed bottom-4 right-4 py-6 px-8 rounded-lg cursor-pointer shadow-lg transition-opacity text-lg"
+      class="fixed bottom-2 right-6 py-6 px-8 rounded-lg cursor-pointer shadow-lg transition-opacity text-lg"
     >
-      <span class="flex gap-2 items-center justify-center text-stone-100">
-        Go to cart ({{ cartStore.cartItemCount }})
+      <span class="flex gap-2 items-center justify-center text-stone-100 z-80 relative">
+        Go cart ({{ cartStore.cartItemCount }})
          <client-only>
           <font-awesome-icon icon="cart-shopping" />
         </client-only>
@@ -17,30 +22,30 @@
 
     <!-- Sepet içeriği -->
     <div
-      :class="['fixed right-0 top-0 overflow-y-scroll w-4/12 h-full bg-stone-800 shadow-lg transition-transform z-50', { 'transform translate-x-full': !isCartVisible, 'transform translate-x-0': isCartVisible }]"
+      :class="['fixed right-0 top-0 overflow-y-scroll w-4/12 h-full bg-stone-800 shadow-lg transition-transform z-50', { 'transform translate-x-full': !isCartVisible, 'transform translate-x-0': isCartVisible }, {'!w-6/12': is750px}, {'w-5/12': is900px}, {'!w-[65%]': is650px}]"
     >
       <div class="p-4 relative">
-        <n-button
+        <!-- <n-button
           type="error"
           @click="toggleCart"
           class="absolute top-1 right-1 cursor-pointer shadow-lg transition-opacity"
-        >
+        > -->
         <client-only>
-          <font-awesome-icon icon="times" class="text-lg" />
+          <font-awesome-icon @click="toggleCart" icon="times" class="absolute top-2 right-2 cursor-pointer shadow-lg transition-opacity text-white text-xl" />
         </client-only>
-        </n-button>
+        <!-- </n-button> -->
         <h2 class="text-2xl font-bold mb-4 text-white">Your Cart</h2>
         <ul class="flex flex-col gap-4 text-white">
           <li v-if="cartStore.cart.length === 0">
             There are no products in your cart. Start by adding a new product 😉
           </li>
           <li v-for="item in cartStore.cart" :key="item.id">
-            <div class="flex bg-stone-700 rounded-lg p-4 relative">
-              <img :src="item.image" alt="Ürün Resmi" class="w-[8rem] h-[8rem] object-cover mr-4 rounded-md" />
+            <div :class="{'flex-col': is450px}"class="flex bg-stone-700 rounded-lg p-4 relative"> <!-- flex-col w-auto mr-0 h-[10rem] -->
+              <img :src="item.image" alt="Ürün Resmi" :class="{'w-auto mr-0 h-[10rem]': is450px}" class="w-[8rem] h-[8rem] object-cover mr-4 rounded-md" />
               <div class="flex flex-col flex-grow justify-around">
                 <div class="text-white font-semibold text-lg">{{ item.name }}</div>
                 <div class="text-gray-400">Price: ${{ item.price }}</div>
-                <div class="flex items-center mt-2">
+                <div :class="{'self-center': is450px}" class="flex items-center mt-2"> <!-- self-center -->
                   <n-button class="rounded-full" type="error" @click="decreaseQuantity(item)"><font-awesome-icon icon="minus" /></n-button>
                   <span class="mx-2 px-3 py-1 border rounded-full text-white">{{ item.quantity }}</span>
                   <n-button class="rounded-full" type="primary" @click="increaseQuantity(item)"><font-awesome-icon icon="plus" /></n-button>
@@ -91,11 +96,17 @@
   import { ref } from 'vue'
   import { useRouter } from 'vue-router';
   import { NButton, NTooltip, useNotification } from "naive-ui"
+  import { useWindowSize } from '@vueuse/core'
   const cartStore = useCartStore()
   const isCartVisible = ref(false)
   const isLoading = ref(false)
   const notification = useNotification()
   const router = useRouter()
+  const { width } = useWindowSize()
+  const is450px = computed(() => width.value <= 450)
+  const is650px = computed(() => width.value <= 650)
+  const is750px = computed(() => width.value <= 750)
+  const is900px = computed(() => width.value <= 900)
 
   const increaseQuantity = (item) => {
     cartStore.addToCart(item)
@@ -119,8 +130,8 @@
     notification.success({
       title: 'Cart cleared successfully',
       duration: 3000,
-      
     })
+    isCartVisible.value = false;
   }
 
   const checkout = () => {
@@ -156,19 +167,18 @@
     setTimeout(() => {
       isLoading.value = false; // Yükleme durumunu false yap
       router.push("/orders")
+      isCartVisible.value = false
     }, 3000);
   }
 
   const toggleCart = () => {
     isCartVisible.value = !isCartVisible.value
   }
-  console.log(isLoading.value)
 </script>
 
 <style scoped>
-/* Sepet bileşeninin stilleri
-.fixed {
-  position: fixed;
-} */
-
+/* Animation for the sidebar */
+.transition-transform {
+  transition: transform 0.4s cubic-bezier(.28,.56,.43,.92);
+}
 </style>
