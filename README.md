@@ -18,3 +18,4 @@ This project is a VueJS [Nuxt] project for learning purposes. It was a restauran
 - A products page includes all different kinds of products and categories.
 - An orders page which contains your previous orders. ( Make sure you are not reloading the page to do not lose your orders 😂 )
 - A cart feature which you can increase or decrease quantity of food. Also you can immediately remove a food from cart and complately clear whole cart.
+- Local storage to save previous orders ( Now you can refresh pages 😉 )
