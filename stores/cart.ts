@@ -17,7 +17,7 @@ interface OrderTypes {
 export const useCartStore = defineStore('cart', {
   state: () => ({
     cart: [] as CartTypes[],
-    orders: [] as OrderTypes[],
+    orders: [] as OrderTypes[], // Başlangıçta boş array
     shippingCost: 10,
     deliveryTime: 30,
   }),
@@ -42,9 +42,22 @@ export const useCartStore = defineStore('cart', {
       this.cart = []
     },
 
-    // Place an order
+    // Place an order and save to localStorage
     addOrder(order: OrderTypes) {
       this.orders.push(order)
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem('orders', JSON.stringify(this.orders))
+      }
+    },
+
+    // Load orders from localStorage
+    loadOrders() {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const storedOrders = localStorage.getItem('orders')
+        if (storedOrders) {
+          this.orders = JSON.parse(storedOrders)
+        }
+      }
     }
   },
   getters: {
@@ -60,3 +73,4 @@ export const useCartStore = defineStore('cart', {
     getOrders: (state) => state.orders,
   }
 })
+
