@@ -19,7 +19,16 @@
   import { useCartStore } from '@/stores/cart'
   import { NGradientText } from 'naive-ui';
   import { computed } from 'vue'
-  import OrderCard from '@/components/OrderCard.vue' // OrderCard bileşenini içe aktar
+  import OrderCard from '@/components/OrderCard.vue'
+  import { useHead } from '#imports'
+
+  useHead({
+    title: 'Orders | Nuxt', // Sayfa başlığı
+    meta: [
+      { name: 'description', content: 'Display your previous orders' },
+      { name: 'keywords', content: 'products, search, ecommerce, orders, food' }
+    ]
+  })
   
   const cartStore = useCartStore()
   const orders = computed(() => cartStore.getOrders)
