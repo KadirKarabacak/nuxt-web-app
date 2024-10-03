@@ -1,5 +1,7 @@
 <template>
-    <div class="border border-stone-500 rounded-lg p-4 mb-4 bg-stone-700 w-3/4 italic">
+    <div class="border border-stone-600 rounded-lg p-4 mb-4 bg-stone-800 w-3/4" :class="{
+          'w-full': isMobile,
+        }">
       <h3 class="text-lg font-semibold text-gray-100 mb-8 flex gap-4 justify-between">Order Date <span class="font-normal text-stone-400"> {{ order.creationDate }} </span></h3>
       <ul class="mb-8">
         <li v-for="item in order.products" :key="item.id" class="flex justify-between items-center w-2/4 border-b pt-2 border-stone-600">
@@ -28,6 +30,9 @@
 <script setup>
   import { defineProps } from 'vue'
   import { NDivider } from 'naive-ui';
+  import { useWindowSize } from '@vueuse/core'
+  const { width } = useWindowSize()
+  const isMobile = computed(() => width.value <= 800)
   
   const props = defineProps({
     order: {
