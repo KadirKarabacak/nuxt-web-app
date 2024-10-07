@@ -1,5 +1,6 @@
 <template>
   <div class="p-4 h-[100dvh] overflow-auto">
+    <!-- <Order /> -->
     <h1 class="text-3xl font-bold mb-6">
       <n-gradient-text type="success" :class="{
           'text-center w-full': isMobile,
@@ -27,6 +28,7 @@ import { computed, onMounted } from 'vue'
 import OrderCard from '@/components/OrderCard.vue'
 import { useHead } from '#imports'
 import { useWindowSize } from '@vueuse/core'
+import Order from '../components/Order.vue'
 const { width } = useWindowSize()
 const isMobile = computed(() => width.value <= 800)
 
